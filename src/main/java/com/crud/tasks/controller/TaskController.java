@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping("/v1/task")
 public class TaskController {
@@ -25,8 +27,13 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTask")
-    public TaskDto getTask(@RequestParam Long id) {
-        return taskMapper.mapToTaskDto(dbService.getTask(id).orElse(new Task((long) 999999999, "Error", "Task not found")));
+    public TaskDto getTask(@RequestParam Long id) throws TaskNotFoundException {
+        return taskMapper.mapToTaskDto(dbService.getTask(id).orElseThrow(TaskNotFoundException::new));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "createTask", consumes = APPLICATION_JSON_VALUE)
+    public void createTask(@RequestBody TaskDto taskDto) {
+        dbService.saveTask(taskMapper.mapToTask(taskDto));
     }
 
     /*
@@ -49,9 +56,6 @@ public class TaskController {
         return new TaskDto((long)1, "Updated Title", "Updated Name");
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createTask")
-    public void createTask(TaskDto taskDto) {
 
-    }
     */
 }
