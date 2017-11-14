@@ -36,26 +36,14 @@ public class TaskController {
         dbService.saveTask(taskMapper.mapToTask(taskDto));
     }
 
-    /*
-    @RequestMapping(method = RequestMethod.GET, value = "getTasks")
-    public List<TaskDto> getTasks() {
-        return new ArrayList<>();
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "getTask/{id}")
-    public TaskDto getTask(@PathVariable("id") String taskId) {
-        return new TaskDto((long)1, "Title", "Name");
-    }
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask/{id}")
-    public void deleteTask(@PathVariable("id") String taskId) {
-    }
-
     @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
-    public TaskDto updateTask() {
-        return new TaskDto((long)1, "Updated Title", "Updated Name");
+    public TaskDto updateTask(@RequestBody TaskDto taskDto) {
+        return taskMapper.mapToTaskDto(dbService.saveTask(taskMapper.mapToTask(taskDto)));
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
+    public void deleteTask(@RequestParam Long id) {
+        dbService.deleteTask(id);
+    }
 
-    */
 }
