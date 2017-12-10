@@ -49,4 +49,9 @@ public class TrelloController {
     public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloClient.createNewCard(trelloCardDto);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
+    public List<TrelloBoardDto> getTrelloBoards() {
+        return trelloClient.getTrelloBoards();
+    }
 }
