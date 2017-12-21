@@ -39,7 +39,6 @@ public class TrelloMappersTestSuite {
         trelloLists.add(new TrelloList("4", "FourthList", true));
 
         trelloBoards.add(new TrelloBoard("One", "FirstBoard", trelloLists));
-//        trelloBoards.add(new TrelloBoard("Two", "SecondBoard", null));
 
         //When
         List<TrelloBoardDto> trelloBoardDto = trelloMapper.mapToBoardDto(trelloBoards);
@@ -63,7 +62,6 @@ public class TrelloMappersTestSuite {
         trelloListsDto.add(new TrelloListDto("4", "FourthList", true));
 
         trelloBoardsDto.add(new TrelloBoardDto("One", "FirstBoard", trelloListsDto));
-//        trelloBoards.add(new TrelloBoard("Two", "SecondBoard", null));
 
         //When
         List<TrelloBoard> trelloBoard = trelloMapper.mapToBoard(trelloBoardsDto);
